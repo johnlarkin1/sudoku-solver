@@ -1,9 +1,13 @@
 import numpy as np
+import time
 import os
 
-use_file = True
+# just defining a few global variables to use
+# maybe later versions might have different size sudokus
 check = True
 SIZE = 9
+# Do you want to analyze the real runtime of this program?
+check_time = True
 
 # -1's should be specified for unfilled locations 
 # in our input file 
@@ -251,11 +255,17 @@ if __name__ == '__main__':
                 if filename[0:6] == 'sudoku' and len(filename) == 14:
                     f = open(directory+filename)
                     matrix = read_input(f)
+                    if check_time:
+                        t0 = time.time()
                     print("Attempting to solve sudoku from filename: {}".format(filename))
                     solved = solve_sudoku(matrix)
                     if solved == None:
                         print "There is no solution"
                     else: 
+                        print("Solved sudoku with filename: {}".format(filename))
+                        if check_time:
+                            t1 = time.time()
+                            print("Time to solve sudoku: {}".format(t1-t0))
                         solution_dict[filename[7:10]] = solved
             for filename in os.listdir(directory):
                 if filename[0:6] == 'sudoku' and len(filename) == 23:
