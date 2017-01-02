@@ -191,6 +191,9 @@ def SS_help(matrix, i, j):
                 ans = SS_help(matrix, unfilled_col, unfilled_row)
                 if ans[0]:
                     return (True, matrix)
+            # if this line is not here, then we are not backtracking 
+            # the program will literally not work without this
+            # which should make sense
             matrix[unfilled_row][unfilled_col] = 0 #-1
             return (False, matrix)
                     
